@@ -8,15 +8,23 @@ namespace WorkflowEngine
 {
     public class WorkFlow
     {
-        private readonly IPrintable _iprint;
-        public WorkFlow(IPrintable Iprint)
+        private readonly IList<IPrintable> _iprint;
+        public WorkFlow()
         {
-            _iprint = Iprint;
+            _iprint = new List<IPrintable>();
         }
 
         public void Run()
         {
-            _iprint.printCommand();
+            foreach(var flow in _iprint)
+            {
+                flow.printCommand();
+            }
+        }
+
+        public void RegisterNewFlow(IPrintable flow)
+        {
+            _iprint.Add(flow);
         }
     }
 }
